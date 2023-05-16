@@ -1,0 +1,13 @@
+.show-video {
+	position: "fixed";
+	top: 0;
+	left: 0;
+	width: $size-full;
+	height: $size-full;
+	background-color: $color-black-700;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	flex-direction: column;
+}

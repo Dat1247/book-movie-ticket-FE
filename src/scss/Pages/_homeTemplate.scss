@@ -1,0 +1,422 @@
+.home-template {
+	.show-video {
+		position: fixed;
+		top: $size-0;
+		left: $size-0;
+		width: $size-full;
+		height: $size-full;
+		background-color: $color-black-700;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 1000;
+
+		div:first-of-type {
+			position: absolute;
+			top: $size-3 * 2;
+			right: $size-3 * 2;
+			z-index: 1500;
+			color: $color-white;
+			padding: math.div($size-3, 2);
+			background-color: transparent;
+			border-radius: math.div($size-3, 4);
+			border: none;
+			transition: background-color 0.5s linear;
+			span {
+				font-size: math.div($size-6, 2);
+				line-height: $size-3 * 2;
+				cursor: pointer;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			&:hover {
+				background-color: $color-red-500;
+			}
+		}
+		.video {
+			iframe {
+				border: none;
+
+				width: $size-11 - 1;
+				height: $size-10 + 1;
+			}
+		}
+	}
+
+	.main {
+		margin: 0 auto $size-6 * 2;
+		& > div {
+			margin: 0 auto;
+			padding: $size-3 + 0.25 $size-6 * 2;
+		}
+		.homeMenu {
+			padding: 0;
+
+			.imgTheater {
+				border-radius: $size-half;
+				width: $size-3 * 2;
+			}
+
+			.theaterNode {
+				display: flex;
+				align-items: center;
+				img {
+					width: $size-3 * 2;
+					height: $size-3 * 2;
+				}
+				p {
+					margin: 0 0 0 math.div($size-3, 2);
+				}
+			}
+
+			.filmItem {
+				& > div {
+					display: flex;
+					img {
+						width: $size-6 + 0.125;
+						height: $size-6 + 2;
+					}
+					& > div {
+						margin-left: math.div($size-3, 2);
+						a {
+							font-weight: $fw-bold;
+							margin-bottom: $size-0;
+							color: $color-green-800;
+							font-size: $size-3;
+							line-height: $size-3;
+						}
+						p {
+							font-size: $size-3 - 0.25;
+							margin: math.div($size-3, 2) 0;
+							font-style: italic;
+							color: $color-gray-700;
+						}
+						.listTime {
+							display: none;
+							grid-template-columns: repeat(3, minmax(0, 1fr));
+							gap: $size-3;
+							a {
+								background-color: $color-cyan-300;
+								color: $color-black;
+								padding: $size-3 - 0.25 $size-3;
+								font-weight: $fw-semibold;
+								font-size: $size-3;
+								line-height: math.div($size-6, 2);
+								border-radius: $size-2 - 0.5;
+								&:hover {
+									background-color: $color-cyan-600;
+									color: $color-white;
+								}
+							}
+						}
+					}
+				}
+				hr {
+					margin: math.div($size-3, 2) 0;
+				}
+			}
+		}
+
+		.row-slick-films {
+			& > div:first-child {
+				display: flex;
+				flex-wrap: nowrap;
+				justify-content: center;
+			}
+			button {
+				padding: $size-3 - 0.25 $size-3;
+				font-weight: $fw-semibold;
+				color: $color-gray-800;
+				background-color: $color-white;
+				border: 2px solid $color-gray-800;
+				transition: all 0.5s ease-in-out;
+				cursor: pointer;
+				&.active_film {
+					background-color: $color-gray-800;
+					color: $color-white;
+				}
+				&.none_active_film {
+					background-color: $color-white;
+					color: $color-gray-800;
+				}
+				&:hover {
+					background-color: $color-gray-800;
+					color: $color-white;
+				}
+				&:first-child {
+					margin-right: math.div($size-3, 2);
+				}
+			}
+		}
+
+		.film_item {
+			margin-top: math.div($size-3, 2);
+			.flip-card {
+				background-color: transparent;
+				width: 175px;
+				height: 250px;
+				perspective: 1000px;
+				margin: 0 auto;
+				.flip-card-inner {
+					position: relative;
+					width: 100%;
+					height: 100%;
+					text-align: center;
+					transition: transform 0.6s;
+					transform-style: preserve-3d;
+					box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+				}
+
+				&:hover {
+					.flip-card-inner {
+						transform: rotateY(180deg);
+					}
+				}
+
+				.flip-card-front,
+				.flip-card-back {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					-webkit-backface-visibility: hidden;
+					backface-visibility: hidden;
+					& img {
+						width: 100%;
+						height: 100%;
+					}
+				}
+
+				.flip-card-front {
+					background-color: rgba(54, 54, 54, 0.63);
+					color: white;
+				}
+
+				.flip-card-back {
+					background-color: rgba(0, 0, 0, 0.9);
+					color: white;
+					transform: rotateY(180deg);
+					top: 0;
+					left: 0;
+					& > div {
+						height: 100%;
+						width: 100%;
+						&:first-of-type {
+							position: absolute;
+							top: 0;
+							left: 0;
+						}
+						&:last-of-type {
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+							background-color: $color-black-700;
+							display: flex;
+							flex-direction: column;
+							align-items: center;
+							justify-content: center;
+							& > div:first-of-type {
+								cursor: pointer;
+								border-radius: $size-half;
+								margin-bottom: math.div($size-3, 2);
+								transition: all 0.3s;
+								span {
+									font-size: $size-6;
+								}
+
+								&:hover {
+									transform: scale(1.3);
+								}
+							}
+							& > div:last-of-type {
+								font-weight: $fw-bold;
+								font-size: $size-3;
+								line-height: $size-3 * 2;
+							}
+						}
+					}
+				}
+			}
+			& > div {
+				display: flex;
+				justify-content: center;
+				a {
+					background-color: $color-indigo-600;
+					text-align: center;
+					color: $color-white;
+					transition: all 0.5s ease-in-out;
+					text-decoration: none;
+					border: 1px solid $color-indigo-600;
+					cursor: pointer;
+					padding: math.div($size-3, 2) 0;
+					font-weight: $fw-bold;
+					margin: math.div($size-3, 2) 0 $size-3;
+					width: 175px;
+					display: inline-block;
+
+					&:hover {
+						background-color: $color-indigo-100;
+						color: $color-black;
+						border-color: $color-black;
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $sm-screen) {
+		.show-video {
+			.video {
+				iframe {
+					width: $size-11 + 5;
+					height: $size-11 - 2;
+				}
+			}
+		}
+		.main {
+			.row-slick-films {
+				button {
+					padding: $size-3 - 0.25 $size-3 * 2;
+				}
+			}
+			.homeMenu {
+				.imgTheater {
+					width: $size-3 * 2;
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $md-screen) {
+		.show-video {
+			.video {
+				iframe {
+					width: $size-12;
+					height: $size-11 * 1.4;
+				}
+			}
+		}
+		.main {
+			.row-slick-films {
+				margin-bottom: $size-3;
+				& > div:first-child {
+					justify-content: flex-start;
+					margin: $size-3 0;
+				}
+			}
+			.homeMenu {
+				.imgTheater {
+					width: $size-6 - 0.5;
+				}
+				.theaterNode {
+					img {
+						width: $size-6 - 0.5;
+						height: $size-6 - 0.5;
+					}
+				}
+				.filmItem {
+					& > div {
+						& > div {
+							margin-left: $size-3;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $lg-screen) {
+		.show-video {
+			.video {
+				iframe {
+					width: $size-11 * 2.5;
+					height: $size-11 * 1.4;
+				}
+			}
+		}
+		.main {
+			.homeMenu {
+				.imgTheater {
+					width: $size-6;
+				}
+				.theaterNode {
+					img {
+						width: $size-6;
+						height: $size-6;
+					}
+				}
+				.filmItem {
+					& > div {
+						img {
+							width: $size-6 * 2.1;
+							height: $size-6 * 3.125;
+						}
+						& > div {
+							a {
+								font-size: $size-3 + 0.25;
+								line-height: $size-3 + 0.75;
+							}
+							p {
+								font-size: $size-2;
+							}
+							.listTime {
+								display: grid;
+							}
+						}
+					}
+					hr {
+						margin: $size-3 0;
+					}
+				}
+			}
+			.film_item {
+				.flip-card {
+					width: 250px;
+					height: 300px;
+					.flip-card-back {
+						& > div {
+							&:last-of-type {
+								& > div:first-of-type {
+									span {
+										font-size: $size-6;
+									}
+								}
+								& > div:last-of-type {
+									font-size: math.div($size-6, 2);
+									line-height: $size-3 * 2;
+								}
+							}
+						}
+					}
+				}
+				& > div {
+					a {
+						width: 250px;
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $xl-screen) {
+		.main {
+			.homeMenu {
+				.filmItem {
+					& > div {
+						& > div {
+							p {
+								margin: math.div($size-3, 2) 0 $size-3;
+							}
+							.listTime {
+								grid-template-columns: repeat(5, minmax(0, 1fr));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

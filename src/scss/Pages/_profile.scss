@@ -1,0 +1,215 @@
+.profile-user {
+	.profile-content {
+		background-color: $color-white-200;
+		& > div {
+			margin: 0 auto;
+			padding: $size-6 * 2 0 $size-5 * 2;
+		}
+		.user-info-form {
+			& > div {
+				display: block;
+				margin-top: $size-3;
+				& > div {
+					grid-column: span 1 / span 1;
+					.text-danger {
+						color: $color-red-600;
+						font-size: 0.8rem;
+						font-weight: 500;
+						margin-top: 0.5rem;
+					}
+					.btnUpdate {
+						text-align: center;
+					}
+				}
+			}
+		}
+		.user-history-content {
+			color: $color-gray-700;
+			.container {
+				padding: 0;
+				margin: 0;
+				& > div {
+					&:first-of-type {
+						display: flex;
+						flex-direction: column;
+						text-align: center;
+						width: $size-full;
+					}
+					&:last-of-type {
+						display: grid;
+						padding: math.div($size-3, 2) $size-3 math.div($size-3, 2)
+							math.div($size-3, 2);
+						grid-template-columns: repeat(1, minmax(0, 1fr));
+						max-height: $size-10 + 4;
+						gap: $size-3 * 2;
+						min-height: $size-10;
+						overflow-y: auto;
+					}
+					.history-title {
+						font-weight: $fw-bold;
+						margin-top: $size-3;
+						font-size: math.div($size-5, 2);
+						line-height: $size-3 * 2;
+						color: $color-black;
+					}
+					.ticketItem {
+						width: $size-full;
+						height: math.div($size-10, 1.38);
+						& > div {
+							display: flex;
+							align-items: center;
+							height: $size-full;
+							padding: math.div($size-3, 2) $size-3;
+							background-color: $color-gray-100;
+							border: 1px solid $color-gray-300;
+							border-radius: math.div($size-3, 2);
+							box-shadow: 0 0 10px 5px $color-black-200;
+							img {
+								width: $size-6 + 1;
+								height: $size-6 + 1;
+								background-color: $color-gray-100;
+								object-fit: cover;
+								object-position: center;
+								margin-right: $size-3;
+								flex-shrink: 0;
+								border-radius: $size-full;
+							}
+						}
+
+						.item-detail {
+							flex-grow: 1;
+							h2 {
+								color: $color-gray-800;
+								font-weight: $fw-bold;
+								line-height: $size-4 - 0.5;
+								font-size: $size-3;
+								margin: 0;
+							}
+							p {
+								margin: math.div($size-3, 4) 0;
+								font-size: $size-2;
+								&:first-of-type {
+									color: $color-gray-500;
+									font-style: italic;
+								}
+								&:last-of-type {
+									color: $color-green-800;
+									font-weight: $fw-bold;
+									padding-right: math.div($size-3, 4);
+									margin-bottom: $size-0;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $sm-screen) {
+		.profile-content {
+			.user-history-content {
+				.container {
+					& > div {
+						.ticketItem {
+							.item-detail {
+								h2 {
+									margin: 0 0 math.div($size-3, 2);
+									font-size: math.div($size-4, 2);
+								}
+								p {
+									margin: math.div($size-3, 2) 0;
+									font-size: $size-3;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	@media screen and (min-width: $md-screen) {
+		.profile-content {
+			.user-info-form {
+				& > div {
+					display: grid;
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+					gap: $size-5;
+					& > div {
+						.btnUpdate {
+							text-align: right;
+						}
+					}
+				}
+			}
+			.user-history-content {
+				.container {
+					& > div {
+						&:last-of-type {
+							grid-template-columns: repeat(2, minmax(0, 1fr));
+							max-height: $size-11;
+						}
+						.history-title {
+							font-size: math.div($size-6, 2);
+						}
+						.ticketItem {
+							height: $size-6 * 3;
+							.item-detail {
+								h2 {
+									font-size: $size-3;
+									margin-bottom: 0;
+								}
+								p {
+									margin: math.div($size-3, 4) 0;
+									font-size: $size-2;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $lg-screen) {
+		.profile-content {
+			.user-history-content {
+				.container {
+					& > div {
+						&:last-of-type {
+							grid-template-columns: repeat(3, minmax(0, 1fr));
+						}
+					}
+				}
+			}
+		}
+	}
+	@media screen and (min-width: $xl-screen) {
+		.profile-content {
+			.user-history-content {
+				.container {
+					margin: $size-4 - 1 auto;
+					& > div {
+						&:last-of-type {
+							max-height: $size-11 * 1.6;
+						}
+						.ticketItem {
+							height: math.div($size-10, 1.38);
+
+							.item-detail {
+								h2 {
+									font-size: math.div($size-4, 2);
+									margin: 0 0 math.div($size-3, 2);
+								}
+								p {
+									margin: math.div($size-3, 2) 0;
+									font-size: $size-3;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

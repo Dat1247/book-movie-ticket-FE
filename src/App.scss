@@ -1,0 +1,23 @@
+@use "sass:math";
+@import "../node_modules/slick-carousel/slick/slick.scss";
+@import "../node_modules/slick-carousel/slick/slick-theme.scss";
+@import "./scss/style.scss";
+@import "./components/LoadingComponent/LoadingComponent.scss";
+
+.container {
+	width: 98%;
+	@media screen and (min-width: $sm-screen) {
+		max-width: 576px;
+	}
+
+	@media screen and (min-width: $md-screen) {
+		max-width: 768px;
+	}
+	@media screen and (min-width: $lg-screen) {
+		max-width: 992px;
+	}
+
+	@media screen and (min-width: $xl-screen) {
+		max-width: 1280px;
+	}
+}

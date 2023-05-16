@@ -1,0 +1,16 @@
+@use "sass:math";
+@import "./Helpers/variables";
+@import "./Helpers/mixin";
+@import "./Base/customize";
+@import "./Pages/userTemplate";
+@import "./Pages/homeTemplate";
+@import "./Pages/pageDetail";
+@import "./Pages/adminTemplate";
+@import "./Pages/userManagement";
+@import "./Pages/filmManagement";
+@import "./Pages/addUser";
+@import "./Pages/films";
+@import "./Pages/profile";
+@import "./Layouts/header";
+@import "./Layouts/footer";
+@import "./Layouts/homeCarousel";

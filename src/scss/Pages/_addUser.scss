@@ -1,0 +1,28 @@
+.user-component {
+	form {
+		h3 {
+			font-size: math.div($size-6, 2);
+			line-height: $size-3 * 2;
+			font-weight: $fw-semibold;
+			margin-left: $size-6 + 1;
+		}
+		.ant-form-item {
+			position: relative;
+		}
+		.iconToggle {
+			position: absolute;
+			top: 20%;
+			left: 95%;
+			cursor: pointer;
+		}
+		.text-danger {
+			color: $color-red-600;
+			font-size: 0.8rem;
+			font-weight: 500;
+			margin-top: 0.5rem;
+		}
+	}
+	& > button {
+		margin-left: $size-6 + 2;
+	}
+}

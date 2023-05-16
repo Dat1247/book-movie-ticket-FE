@@ -1,0 +1,69 @@
+.banner-carousel {
+	position: relative;
+	z-index: 10;
+	.slick-slide {
+		.banner-item {
+			max-height: $size-12 - 6;
+			height: $size-11 - 5;
+			color: $color-white;
+			text-align: center;
+			line-height: $size-10 - 2;
+			background: $color-black;
+			background-position: center;
+			background-size: 100%;
+			background-repeat: no-repeat;
+			img {
+				width: $size-full;
+				opacity: 0;
+			}
+		}
+	}
+	.slick-dots-bottom {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	@media screen and (min-width: $sm-screen) {
+		.slick-slide {
+			.banner-item {
+				height: $size-11 - 1.5;
+			}
+		}
+	}
+
+	@media screen and (min-width: $md-screen) {
+		.slick-slide {
+			.banner-item {
+				height: $size-11 + 5;
+			}
+		}
+	}
+
+	@media screen and (min-width: $lg-screen) {
+		.slick-slide {
+			.banner-item {
+				height: $size-12 - 4;
+			}
+		}
+	}
+}
+
+.homeMenu .ant-tabs .ant-tabs-nav {
+	height: 500px;
+	overflow-y: auto;
+}
+
+.homeMenu .ant-tabs .ant-tabs-content {
+	height: 500px;
+	overflow-y: auto;
+}
+
+.lichChieu .ant-tabs {
+	color: white;
+}
+
+.lichChieu .ant-tabs .ant-tabs-content.ant-tabs-content-left {
+	max-height: 300px;
+	height: auto;
+	overflow-y: auto;
+}

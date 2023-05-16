@@ -1,0 +1,169 @@
+.footer-app {
+	padding: math.div($size-3, 2) 0;
+	background-color: $color-black;
+	.container {
+		margin: 0 auto;
+		border-top-width: 1px;
+		border-bottom-width: 0px;
+		border-color: $color-gray-400;
+
+		& > div {
+			display: grid;
+			&:first-of-type {
+				grid-template-columns: repeat(12, minmax(0, 1fr));
+				& > div {
+					&:first-of-type {
+						padding-bottom: math.div($size-6, 2);
+						grid-column: 1 / -1;
+						a {
+							display: flex;
+							align-items: center;
+							padding: math.div($size-3, 2);
+							img {
+								width: 150px;
+							}
+						}
+					}
+
+					&:not(:first-of-type) {
+						grid-column: span 6 / span 6;
+						text-align: center;
+						& > p {
+							margin: $size-0;
+							padding-bottom: math.div($size-3, 2);
+							font-size: math.div($size-4, 2);
+							line-height: math.div($size-6, 2);
+							color: $color-white;
+							font-weight: $fw-semibold;
+							letter-spacing: $size-1 * 3;
+						}
+					}
+					&.theatersLogoFooter {
+						div {
+							display: grid;
+							grid-template-columns: repeat(3, minmax(0, 1fr));
+							gap: $size-3;
+							img {
+								justify-self: center;
+								width: $size-6 - 0.5;
+								height: $size-6 - 0.5;
+							}
+						}
+					}
+					&.socialFooter {
+						div {
+							display: flex;
+							justify-content: center;
+							gap: math.div($size-3, 2);
+							a {
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								border-radius: 50%;
+								width: $size-5;
+								height: $size-5;
+								color: $color-gray-800;
+								background-color: $color-violet-400;
+								svg {
+									width: math.div($size-5, 2);
+									height: math.div($size-5, 2);
+								}
+							}
+						}
+					}
+				}
+			}
+			&:last-of-type {
+				margin-top: $size-3;
+				justify-content: center;
+				padding-top: math.div($size-6, 2);
+				div {
+					display: flex;
+					flex-direction: column;
+					color: $color-white;
+					text-align: center;
+					align-self: center;
+					font-size: $size-2;
+					line-height: $size-3 + 0.25rem;
+					a {
+						color: $color-cyan-600;
+						text-decoration: none;
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $md-screen) {
+		.container {
+			& > div {
+				&:first-of-type {
+					& > div {
+						&:first-of-type {
+							padding-bottom: $size-0;
+							grid-column: span 6 / span 6;
+							a {
+								img {
+									width: 200px;
+								}
+							}
+						}
+						&:not(:first-of-type) {
+							grid-column: span 3 / span 3;
+							text-align: left;
+						}
+						&.theatersLogoFooter {
+							margin-right: $size-3;
+							div {
+								gap: math.div($size-5, 2);
+								img {
+									justify-self: unset;
+									width: $size-6;
+									height: $size-6;
+								}
+							}
+						}
+						&:last-of-type {
+							div {
+								justify-content: flex-start;
+							}
+						}
+					}
+				}
+				&:last-of-type {
+					margin-top: $size-6;
+
+					div {
+						display: block;
+						a {
+							margin-left: math.div($size-6, 2);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $lg-screen) {
+		.container {
+			& > div {
+				&:first-of-type {
+					& > div {
+						&:last-of-type {
+							div {
+								padding-top: $size-0;
+								grid-column-end: 13;
+							}
+						}
+					}
+				}
+				&:last-of-type {
+					justify-content: space-between;
+					div {
+						grid-column-start: 1;
+					}
+				}
+			}
+		}
+	}
+}

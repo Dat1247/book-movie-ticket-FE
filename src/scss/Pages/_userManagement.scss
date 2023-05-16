@@ -1,0 +1,67 @@
+.user-management {
+	h3 {
+		font-size: math.div($size-6, 2);
+		line-height: $size-3 * 2;
+		margin: 0;
+	}
+	button {
+		margin-bottom: $size-3;
+	}
+	.find-user-input {
+		margin-bottom: $size-3;
+	}
+
+	.userTable {
+		.btnGroup {
+			a {
+				color: $color-green-500;
+
+				margin-right: math.div($size-3, 2);
+
+				transition: all 0.5s;
+				&:hover {
+					color: $color-green-800;
+				}
+				span {
+					font-size: $size-3;
+
+					line-height: $size-4 - 0.5;
+				}
+			}
+			button {
+				color: $color-red-500;
+				margin: 0 math.div($size-3, 2) 0 0;
+				transition: all 0.5s;
+				background-color: transparent;
+				border: none;
+				cursor: pointer;
+				&:hover {
+					color: $color-red-800;
+				}
+				span {
+					font-size: $size-3;
+
+					line-height: $size-4 - 0.5;
+				}
+			}
+		}
+	}
+	@media screen and (min-width: $xl-screen) {
+		.userTable {
+			.btnGroup {
+				a {
+					margin-right: $size-3;
+					span {
+						font-size: math.div($size-5, 2);
+					}
+				}
+				button {
+					margin-right: $size-3;
+					span {
+						font-size: math.div($size-5, 2);
+					}
+				}
+			}
+		}
+	}
+}

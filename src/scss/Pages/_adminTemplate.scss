@@ -1,0 +1,43 @@
+.admin-template {
+	min-height: 100vh;
+	header {
+		background-color: transparent;
+		padding: $size-0;
+		& > div {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			box-shadow: 0 0 10px 4px $color-black-200;
+			padding-right: $size-3;
+			& > div {
+				cursor: pointer;
+				&:first-of-type {
+					margin-right: math.div($size-3, 2);
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					div {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: $size-5;
+						height: $size-5;
+						border-radius: $size-full;
+						background-color: $color-red-200;
+					}
+				}
+				&:last-of-type.text-danger {
+					color: $color-red-600;
+					transition: color 0.3s ease-in-out;
+					&:hover {
+						color: $color-red-800;
+					}
+				}
+			}
+		}
+	}
+	div.site-layout-background {
+		padding: math.div($size-6, 2);
+		min-height: $size-11 + 2;
+	}
+}

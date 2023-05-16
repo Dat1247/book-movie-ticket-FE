@@ -1,0 +1,218 @@
+.user-template {
+	.user-template__left {
+		justify-content: center;
+		align-items: center;
+		flex: 1 1 0%;
+		height: 100vh;
+		display: none;
+		background-color: $color-indigo-100;
+		& > div {
+			max-width: 20rem;
+			transition-duration: 200ms;
+			--tw-translate-x: 0;
+			--tw-translate-y: 0;
+			--tw-rotate: 0;
+			--tw-skew-x: 0;
+			--tw-skew-y: 0;
+			--tw-scale-x: 1;
+			--tw-scale-y: 1;
+			transform: translateX(var(--tw-translate-x))
+				translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
+				skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+				scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+			cursor: pointer;
+			transform: scale(1.1);
+			& > svg {
+				width: 83.333333%;
+				margin: 0 auto;
+			}
+		}
+	}
+
+	.user-template__right {
+		background-color: #fff;
+		.content {
+			padding: 0 $size-6 * 2;
+
+			h2 {
+				text-align: center;
+				color: $color-indigo-800;
+				font-weight: 600;
+				line-height: math.div($size-5, 2);
+				font-size: $size-3 + 0.5;
+			}
+			& > div {
+				margin-top: math.div($size-6, 2);
+			}
+		}
+		.form-control-login {
+			&:not(:first-of-type) {
+				margin-top: $size-3;
+			}
+			& > div {
+				font-size: 0.875rem;
+				line-height: 1;
+				font-weight: bold;
+				letter-spacing: 0.025em;
+				color: $color-gray-700;
+			}
+
+			input {
+				width: 100%;
+				font-size: $size-3;
+				padding: math.div($size-3, 4) 0;
+				line-height: 1.75rem;
+				background-color: transparent;
+				color: $color-gray-700;
+				border: none;
+				border-bottom: 1px solid $color-gray-300 !important;
+				&:focus {
+					outline: none;
+					border-color: $color-indigo-500;
+				}
+			}
+			.text-danger {
+				color: $color-red-600;
+				font-size: 0.8rem;
+				font-weight: 500;
+				margin-top: 0.5rem;
+			}
+		}
+
+		.passWordInput {
+			position: relative;
+			& > div {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.title-label {
+				font-size: 0.875rem;
+				line-height: 1;
+				font-weight: bold;
+				letter-spacing: 0.025em;
+				color: $color-gray-700;
+			}
+			a {
+				font-size: 0.75rem;
+				line-height: 1rem;
+				font-weight: 600;
+				color: $color-indigo-600;
+				cursor: pointer;
+				&:hover {
+					color: $color-indigo-800;
+				}
+			}
+			.showPassword {
+				position: absolute;
+				cursor: pointer;
+				bottom: 25%;
+				left: 95%;
+			}
+		}
+		.btnLogin {
+			margin-top: $size-3 * 2;
+			button {
+				padding: 1rem;
+				width: 100%;
+				font-weight: 600;
+				color: $color-gray-100;
+				background-color: $color-indigo-500;
+				letter-spacing: 0.025rem;
+				border-radius: 30px;
+				border: none;
+				cursor: pointer;
+				box-shadow: $shadow;
+				&:hover {
+					background-color: $color-indigo-600;
+				}
+				&:focus {
+					outline: none;
+				}
+			}
+		}
+
+		.textAttention {
+			font-size: 0.875rem;
+			line-height: 1.25rem;
+			padding: $size-3 0;
+			font-weight: 600;
+			color: $color-gray-700;
+			text-align: center;
+			a {
+				cursor: pointer;
+				color: $color-indigo-600;
+				&:hover {
+					color: $color-indigo-800;
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $md-screen) {
+		display: flex;
+		align-items: center;
+		.user-template__left {
+			display: flex;
+		}
+		.user-template__right {
+			width: 55%;
+			.content {
+				padding: 0 $size-6;
+			}
+		}
+	}
+
+	@media screen and (min-width: $lg-screen) {
+		display: flex;
+		.user-template__left {
+			display: flex;
+		}
+		.user-template__right {
+			width: 50%;
+
+			.content {
+				padding: 0 $size-6;
+				margin-top: $size-6 + 1;
+				h2 {
+					line-height: $size-5;
+					font-size: $size-4;
+					text-align: left;
+				}
+				& > div {
+					margin-top: $size-6;
+				}
+			}
+			.form-control-login {
+				&:not(:first-of-type) {
+					margin-top: $size-3 * 2;
+				}
+				input {
+					font-size: math.div($size-4, 2);
+					padding: math.div($size-3, 2rem) 0;
+				}
+			}
+			.btnLogin {
+				margin-top: $size-5;
+			}
+			.textAttention {
+				padding: $size-4 0;
+			}
+		}
+	}
+
+	@media screen and (min-width: $xl-screen) {
+		.user-template__right {
+			max-width: 640px;
+			.content {
+				padding: 0 6rem;
+				max-width: 42rem;
+				h2 {
+					font-size: 3rem;
+					line-height: 1;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}

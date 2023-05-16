@@ -1,0 +1,81 @@
+.header-app {
+	padding: math.div($size-3, 2) 0;
+	background-color: rgba($color-black, 0.8);
+	color: $color-white;
+	position: fixed;
+	width: $size-full;
+	z-index: 40;
+	& > .container {
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		height: $size-6 + 1rem;
+		& > a {
+			display: flex;
+			align-items: center;
+			padding: math.div($size-3, 2);
+			img {
+				width: 150px;
+			}
+		}
+
+		.btnGroups {
+			display: flex;
+			align-items: center;
+			flex-shrink: 0;
+			button {
+				align-self: center;
+				padding: math.div($size-6, 4) $size-3;
+				border-radius: math.div($size-3, 4);
+				border: 1px solid transparent;
+				color: $color-white;
+				font-weight: $fw-semibold;
+				letter-spacing: 1px;
+				transition: all 0.5s;
+				cursor: pointer;
+				&:first-of-type {
+					background-color: transparent;
+					margin-right: math.div($size-3, 2);
+					&:hover {
+						color: $color-violet-400;
+					}
+				}
+				&:last-of-type {
+					background-color: $color-violet-400;
+					&:hover {
+						background-color: transparent;
+						border-color: $color-violet-400;
+					}
+				}
+			}
+			span {
+				font-weight: $fw-bold;
+			}
+		}
+	}
+
+	@media screen and (min-width: $sm-screen) {
+		& > .container {
+			.btnGroups {
+				button {
+					padding: math.div($size-6, 4) $size-3 * 1.5;
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $md-screen) {
+		& > .container {
+			& > a {
+				img {
+					width: 200px;
+				}
+			}
+			.btnGroups {
+				button {
+					padding: math.div($size-6, 4) $size-3 * 2;
+				}
+			}
+		}
+	}
+}
