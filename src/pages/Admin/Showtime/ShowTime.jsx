@@ -10,8 +10,8 @@ import { createShowtimeAction } from "../../../redux/actions/TheaterManagementAc
 
 export default function ShowTime(props) {
 	const [state, setState] = useState({
-		heThongRapChieu: [],
-		cumRapChieu: [],
+		arrTheaters: [],
+		arrTheaterClusters: [],
 	});
 	const dispatch = useDispatch();
 	const codeFilm = useParams();
@@ -34,12 +34,12 @@ export default function ShowTime(props) {
 
 			setState({
 				...state,
-				heThongRapChieu: result.data.content,
+				arrTheaters: result.data.content,
 			});
 		} catch (err) {
 			Notification(
 				"error",
-				"Không thể lấy thông tin hệ thống rạp!",
+				"Unable to get theater detail!",
 				err.response?.data.content
 			);
 		}
@@ -49,7 +49,7 @@ export default function ShowTime(props) {
 		getArrayTheaterShowTime();
 	}, [dispatch]);
 
-	const getArrayTheaterNode = async (maHeThongRap) => {
+	const getArrayTheaterClusters = async (maHeThongRap) => {
 		try {
 			const result = await TheaterManagementService.getTheaterClusterByDetails(
 				maHeThongRap
@@ -57,22 +57,22 @@ export default function ShowTime(props) {
 
 			setState({
 				...state,
-				cumRapChieu: result.data.content,
+				arrTheaterClusters: result.data.content,
 			});
 		} catch (err) {
 			Notification(
 				"error",
-				"Không thể lấy danh sách cụm rạp!",
+				"Unable to get the list of theater clusters!",
 				err.response?.data.content
 			);
 		}
 	};
 
-	const handleChangeHeThongRap = (value) => {
-		getArrayTheaterNode(value);
+	const handleChangeTheater = (value) => {
+		getArrayTheaterClusters(value);
 	};
 
-	const handleChangeCumRap = (value) => {
+	const handleChangeTheaterClusters = (value) => {
 		formik.setFieldValue("maRap", value);
 	};
 
@@ -90,7 +90,7 @@ export default function ShowTime(props) {
 	};
 
 	return (
-		<div>
+		<div className='showtime-component'>
 			<Form
 				labelCol={{
 					span: 4,
@@ -104,14 +104,14 @@ export default function ShowTime(props) {
 				}}
 				size={"default"}
 				onSubmitCapture={formik.handleSubmit}>
-				<h3 className='text-2xl'>Tạo lịch chiếu</h3>
+				<h3 className='text-2xl'>Create Showtime</h3>
 
-				<Form.Item label='Mã phim'>
+				<Form.Item label='Film Code'>
 					<Input value={codeFilm.id} disabled={true} />
 				</Form.Item>
-				<Form.Item label='Hệ thống rạp'>
-					<Select onChange={handleChangeHeThongRap}>
-						{state.heThongRapChieu.map((htr, index) => {
+				<Form.Item label='Theater'>
+					<Select onChange={handleChangeTheater}>
+						{state.arrTheaters.map((htr, index) => {
 							return (
 								<Select.Option value={htr.maHeThongRap} key={index}>
 									{htr.tenHeThongRap}
@@ -120,9 +120,9 @@ export default function ShowTime(props) {
 						})}
 					</Select>
 				</Form.Item>
-				<Form.Item label='Cụm rạp'>
-					<Select onChange={handleChangeCumRap}>
-						{state.cumRapChieu.map((cumRap, index) => {
+				<Form.Item label='Theater Cluster'>
+					<Select onChange={handleChangeTheaterClusters}>
+						{state.arrTheaterClusters.map((cumRap, index) => {
 							return (
 								<Select.Option value={cumRap.maCumRap} key={index}>
 									{cumRap.tenCumRap}
@@ -132,21 +132,31 @@ export default function ShowTime(props) {
 					</Select>
 				</Form.Item>
 
-				<Form.Item label='Ngày chiếu giờ chiếu'>
+				<Form.Item label='Release date'>
 					<DatePicker
 						showTime
+						placement='topLeft'
 						format='DD/MM/YYYY HH:mm:ss'
 						onChange={onChangeDate}
 						onOk={onOk}
 					/>
 				</Form.Item>
-				<Form.Item label='Giá vé'>
+				<Form.Item label='Price'>
 					<InputNumber min={75000} max={150000} onChange={onChangeNumber} />
 				</Form.Item>
-				<Form.Item label='Tác vụ'>
-					<Button htmlType='submit'>Thêm lịch chiếu</Button>
+				<Form.Item label='Action'>
+					<Button htmlType='submit' type='primary'>
+						Create
+					</Button>
 				</Form.Item>
 			</Form>
+			<Button
+				danger
+				onClick={() => {
+					navigate(-1);
+				}}>
+				Back
+			</Button>
 		</div>
 	);
 }

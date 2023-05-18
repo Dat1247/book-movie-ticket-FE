@@ -162,3 +162,61 @@
 		}
 	}
 }
+
+.ant-picker-dropdown {
+	.ant-picker-panel-container {
+		max-height: 300px;
+		overflow-y: auto !important;
+		scrollbar-width: thin;
+		scrollbar-color: #ccc transparent;
+
+		&::-webkit-scrollbar {
+			width: 5px;
+		}
+		&::-webkit-scrollbar-track {
+			background: #f1f1f1;
+			border-radius: 10px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background: #ccc;
+			border-radius: 10px;
+		}
+		&::-webkit-scrollbar-thumb:hover {
+			background: #aaa;
+		}
+		.ant-picker-panel-layout {
+			margin-right: math.div($size-3, 4);
+		}
+		.ant-picker-date-panel {
+			.ant-picker-body {
+				padding: $size-0 $size-3;
+			}
+		}
+		.ant-picker-time-panel {
+			.ant-picker-time-panel-column {
+				scrollbar-width: thin;
+				scrollbar-color: #ccc transparent;
+
+				&::-webkit-scrollbar {
+					width: 5px;
+				}
+				&::-webkit-scrollbar-track {
+					background: #f1f1f1;
+					border-radius: 10px;
+				}
+				&::-webkit-scrollbar-thumb {
+					background: #ccc;
+					border-radius: 10px;
+				}
+				&::-webkit-scrollbar-thumb:hover {
+					background: #aaa;
+				}
+			}
+		}
+		.ant-picker-footer {
+			.ant-picker-ranges {
+				margin-top: 0;
+			}
+		}
+	}
+}
