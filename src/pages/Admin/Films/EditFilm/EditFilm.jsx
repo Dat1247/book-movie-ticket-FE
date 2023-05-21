@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import {
 	Form,
 	Input,
@@ -9,13 +9,16 @@ import {
 	Switch,
 } from "antd";
 import { useFormik } from "formik";
-import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	getFilmDetailsByFilmCodeAction,
 	updateFilmDetailAction,
 } from "../../../../redux/actions/FilmManagementAction";
 import { useNavigate, useParams } from "react-router-dom";
+import dayjs from "dayjs";
+import { lazy } from "react";
+
+const ErrorImage = lazy(() => import("../../../../assets/img/image-error.png"));
 
 export default function EditFilm(props) {
 	const [componentSize, setComponentSize] = useState("default");
@@ -42,19 +45,17 @@ export default function EditFilm(props) {
 			maNhom: filmDetail?.maNhom,
 		},
 		onSubmit: (values) => {
-			let ngayKhoiChieuMoment = moment(values.ngayKhoiChieu).format(
-				"DD/MM/YYYY"
-			);
-
 			let formData = new FormData();
 			for (let key in values) {
 				if (key !== "hinhAnh") {
 					if (key === "ngayKhoiChieu") {
-						formData.append("hinhAnh", ngayKhoiChieuMoment);
+						let dateChange = dayjs(values[key]).format("DD/MM/YYYY");
+						formData.append(key, dateChange);
+					} else {
+						formData.append(key, values[key]);
 					}
-					formData.append(key, values[key]);
 				} else {
-					if (values.hinhAnh !== null) {
+					if (values[key] !== null) {
 						formData.append("File", values.hinhAnh, values.hinhAnh.name);
 					}
 				}
@@ -66,15 +67,15 @@ export default function EditFilm(props) {
 
 	useEffect(() => {
 		dispatch(getFilmDetailsByFilmCodeAction(codeFilm.id));
-	}, [dispatch]);
+	}, []);
 
 	const onFormLayoutChange = ({ size }) => {
 		setComponentSize(size);
 	};
 
 	const handleChangeDatePicker = (value) => {
-		let releaseDate = moment(value);
-		formik.setFieldValue("ngayKhoiChieu", releaseDate);
+		const changeDate = value.$d;
+		formik.setFieldValue("ngayKhoiChieu", changeDate);
 	};
 
 	const handleChangeValue = (name) => {
@@ -153,8 +154,8 @@ export default function EditFilm(props) {
 				<Form.Item label='Release date'>
 					<DatePicker
 						format={"DD/MM/YYYY"}
+						value={dayjs(formik.values.ngayKhoiChieu)}
 						onChange={handleChangeDatePicker}
-						value={moment(formik.values.ngayKhoiChieu)}
 					/>
 				</Form.Item>
 				<Form.Item label='Now Showing'>
@@ -191,7 +192,18 @@ export default function EditFilm(props) {
 						accept='image/png, image/jpeg, image/gif, image/jpg'
 					/>
 					<br />
-					<img src={imgSrc === "" ? filmDetail?.hinhAnh : imgSrc} alt='...' />
+					<Suspense fallback={<p>Loading...</p>}>
+						<img
+							src={
+								imgSrc === ""
+									? filmDetail?.hinhAnh
+										? filmDetail?.hinhAnh
+										: ErrorImage
+									: imgSrc
+							}
+							alt='...'
+						/>
+					</Suspense>
 				</Form.Item>
 
 				<Form.Item label='Action'>

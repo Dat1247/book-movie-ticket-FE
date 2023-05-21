@@ -1,4 +1,3 @@
-import { ThongTinDatVe } from "../_core/models/ThongTinDatVe";
 import { BaseService } from "./baseService";
 
 export const BookTicketService = {
@@ -8,7 +7,7 @@ export const BookTicketService = {
 		);
 	},
 
-	bookingTicket: (thongTinDatVe = new ThongTinDatVe()) => {
-		return BaseService.post(`api/QuanLyDatVe/DatVe`, thongTinDatVe);
+	bookTicket: (bookTicketInformation = new ThongTinDatVe()) => {
+		return BaseService.post(`api/QuanLyDatVe/DatVe`, bookTicketInformation);
 	},
 };

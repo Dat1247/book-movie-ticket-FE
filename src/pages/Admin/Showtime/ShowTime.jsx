@@ -75,7 +75,6 @@ export default function ShowTime(props) {
 	const handleChangeTheaterClusters = (value) => {
 		formik.setFieldValue("maRap", value);
 	};
-
 	const onChangeDate = (value, dateString) => {
 		formik.setFieldValue("ngayChieuGioChieu", dateString);
 	};

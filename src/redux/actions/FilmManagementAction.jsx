@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FilmManagementService } from "../../services/FilmManagementService";
+import { closeLoading, openLoading } from "../slices/LoadingSlice";
 
 export const getArrayFilmAction = createAsyncThunk(
 	"filmManagement/getArrayFilmAction",
@@ -42,11 +43,14 @@ export const getFilmDetailsByFilmCodeAction = createAsyncThunk(
 export const addNewFilmAction = createAsyncThunk(
 	"filmManagement/addNewFilmAction",
 	async (formData, { dispatch, getState, rejectWithValue }) => {
+		dispatch(openLoading());
 		try {
 			let result = await FilmManagementService.addNewFilm(formData);
+			dispatch(closeLoading());
 			const { navigate } = getState().HistoryReducer;
 			return { result, navigate };
 		} catch (err) {
+			dispatch(closeLoading());
 			return rejectWithValue(err);
 		}
 	}
@@ -55,13 +59,17 @@ export const addNewFilmAction = createAsyncThunk(
 export const updateFilmDetailAction = createAsyncThunk(
 	"filmManagement/updateFilmDetailAction",
 	async (formDataUpload, { dispatch, getState, rejectWithValue }) => {
+		dispatch(openLoading());
 		try {
 			const result = await FilmManagementService.updateFilmDetail(
 				formDataUpload
 			);
+			await dispatch(getArrayFilmAction());
+			dispatch(closeLoading());
 			const { navigate } = getState().HistoryReducer;
-			return { result, navigate };
+			return { result, navigate, dispatch };
 		} catch (err) {
+			dispatch(closeLoading());
 			return rejectWithValue(err);
 		}
 	}

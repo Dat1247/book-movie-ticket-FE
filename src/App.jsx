@@ -18,7 +18,7 @@ import AddUser from "./pages/Admin/Users/AddUser/AddUser";
 import EditUser from "./pages/Admin/Users/EditUser/EditUser";
 import Films from "./pages/Admin/Films/Films";
 import AddFilm from "./pages/Admin/Films/AddFilm/AddFilm";
-import EditFilm from "./pages/Admin/Films/EditFilm/EditPhim";
+import EditFilm from "./pages/Admin/Films/EditFilm/EditFilm";
 import ShowTime from "./pages/Admin/Showtime/ShowTime";
 
 function App() {

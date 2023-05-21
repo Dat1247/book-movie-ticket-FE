@@ -12,9 +12,10 @@ import { useFormik } from "formik";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { GROUP_ID } from "../../../../utils/settings/config";
-import ErrorImage from "../../../../assets/img/image-error.png";
 import { useNavigate } from "react-router-dom";
 import { addNewFilmAction } from "../../../../redux/actions/FilmManagementAction";
+import ErrorImage from "../../../../assets/img/image-error.png";
+import dayjs from "dayjs";
 
 export default function AddFilm(props) {
 	const [componentSize, setComponentSize] = useState("default");
@@ -38,6 +39,8 @@ export default function AddFilm(props) {
 		},
 		onSubmit: (values) => {
 			values.maNhom = GROUP_ID;
+			console.log(values);
+
 			let formData = new FormData();
 			for (let key in values) {
 				if (key !== "hinhAnh") {
@@ -56,7 +59,8 @@ export default function AddFilm(props) {
 	};
 
 	const handleChangeDatePicker = (value) => {
-		let releaseDate = moment(value).format("DD/MM/YYYY");
+		let releaseDate = dayjs(value.$d).format("DD/MM/YYYY");
+
 		formik.setFieldValue("ngayKhoiChieu", releaseDate);
 	};
 

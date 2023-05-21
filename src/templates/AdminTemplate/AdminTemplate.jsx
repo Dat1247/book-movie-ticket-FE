@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { TOKEN, USER_LOGIN } from "../../utils/settings/config";
 import { Layout, Menu } from "antd";
 import {
@@ -104,21 +104,31 @@ export const AdminTemplate = (props) => {
 					<Layout className='site-layout'>
 						<Header className='site-layout-background'>
 							<div>
-								<div
-									onClick={() => {
-										navigate("/profile");
-									}}>
-									<div>{userLogin?.taiKhoan?.substr(0, 1)}</div>
+								<div className='header__right'>
+									<NavLink to='/'>
+										<img
+											src='https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png'
+											alt='cyberlearn.vn'
+										/>
+									</NavLink>
 								</div>
-								<div
-									onClick={() => {
-										localStorage.removeItem(USER_LOGIN);
-										localStorage.removeItem(TOKEN);
-										navigate("/");
-										window.location.reload();
-									}}
-									className='text-danger'>
-									Đăng xuất
+								<div className='header__left'>
+									<div
+										onClick={() => {
+											navigate("/profile");
+										}}>
+										<div>{userLogin?.taiKhoan?.substr(0, 1)}</div>
+									</div>
+									<div
+										onClick={() => {
+											localStorage.removeItem(USER_LOGIN);
+											localStorage.removeItem(TOKEN);
+											navigate("/");
+											window.location.reload();
+										}}
+										className='text-danger'>
+										Log out
+									</div>
 								</div>
 							</div>
 						</Header>

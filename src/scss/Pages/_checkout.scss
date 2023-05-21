@@ -1,0 +1,361 @@
+.checkout-container {
+	padding: math.div($size-5, 2) $size-3;
+	.checkout-container__left {
+		margin-right: $size-3;
+		cursor: pointer;
+		span {
+			transition: all 0.3s;
+			font-size: math.div($size-5, 2);
+			&:hover {
+				color: $color-cyan-600;
+			}
+		}
+	}
+	.checkout-container__right {
+		p {
+			margin: $size-0;
+			cursor: pointer;
+			span {
+				font-weight: $fw-semibold;
+			}
+		}
+	}
+	.booking-seat-container {
+		& > div {
+			display: grid;
+			grid-template-columns: repeat(12, minmax(0, 1fr));
+		}
+		.booking-seat__content {
+			grid-column: span 9 / span 9;
+			& > div {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin-top: $size-0;
+				& > div:last-of-type {
+					margin-top: $size-3;
+					display: flex;
+					justify-content: center;
+					width: 80%;
+				}
+			}
+			.seat {
+				width: 25px;
+				height: 25px;
+				border-radius: 4px;
+				cursor: pointer;
+				margin: 10px;
+				background-color: $color-white;
+				border: 1px solid $color-black;
+				padding: 0;
+
+				span {
+					font-size: $size-3 - 0.25;
+				}
+			}
+			.seat.occupied {
+				background-color: rgb(224, 54, 54);
+				cursor: no-drop;
+				color: white;
+			}
+
+			.bookingSeat {
+				background-color: rgb(18, 176, 18) !important;
+				color: white;
+			}
+
+			.vipSeat {
+				background-color: rgb(201, 196, 38);
+				color: white;
+			}
+
+			.seat.yourBooked {
+				background-color: rgb(194, 194, 194);
+				color: black;
+				box-shadow: 0 0px 10px -2px #000;
+			}
+
+			.otherOneAreBooking {
+				background-color: rgb(68, 131, 247);
+				color: white;
+				cursor: no-drop;
+			}
+			.note-seat {
+				width: $size-full;
+				thead {
+					background-color: $color-gray-300;
+				}
+				tbody {
+					td {
+						text-align: center;
+					}
+				}
+			}
+			.trapezoid {
+				border-bottom: 50px solid $color-gray-500;
+				border-left: 20px solid transparent;
+				border-right: 20px solid transparent;
+				height: 0;
+				width: 90%;
+				filter: drop-shadow(0px 60px 40px $color-black);
+				p {
+					text-align: center;
+				}
+			}
+
+			.screen {
+				width: 90%;
+				background-color: $color-black;
+				height: 10px;
+			}
+
+			.render-seats {
+			}
+		}
+		.booking-seat__info {
+			grid-column: span 3 / span 3;
+			& > div {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				min-height: $size-full;
+				box-shadow: 0 10px 10px 4px $color-black-200;
+				& > div {
+					&:first-of-type {
+						padding: $size-3;
+						h3 {
+							text-align: center;
+							color: $color-green-500;
+							font-weight: $fw-bold;
+							font-size: math.div($size-5, 2);
+							line-height: math.div($size-6, 2);
+						}
+						div {
+							margin: $size-0;
+							&:first-of-type {
+								h3 {
+									font-weight: $fw-bold;
+									font-size: $size-3;
+									line-height: math.div($size-5, 2);
+								}
+							}
+							&:not(:first-of-type) {
+								p:first-of-type {
+									color: $color-gray-700;
+									margin: $size-0;
+									font-style: italic;
+								}
+							}
+						}
+
+						.show-seats {
+							display: flex;
+							justify-content: space-between;
+							font-size: $size-2;
+							line-height: math.div($size-5, 2);
+							.arrSeats {
+								max-height: $size-6 + 2;
+								overflow-y: auto;
+								margin: $size-0;
+								color: $color-red-500;
+								width: calc(100% * 2 / 3);
+								scrollbar-width: thin;
+								scrollbar-color: #ccc transparent;
+
+								&::-webkit-scrollbar {
+									width: 5px;
+								}
+								&::-webkit-scrollbar-track {
+									background: #f1f1f1;
+									border-radius: 10px;
+								}
+								&::-webkit-scrollbar-thumb {
+									background: #ccc;
+									border-radius: 10px;
+								}
+								&::-webkit-scrollbar-thumb:hover {
+									background: #aaa;
+								}
+								& > div {
+									display: flex;
+									flex-wrap: wrap;
+									margin: $size-0 $size-2 - 0.25 $size-0 $size-0;
+
+									span {
+										margin-right: math.div($size-3, 2);
+										&:first-of-type {
+											font-weight: $fw-bold;
+											font-style: italic;
+										}
+										.show-seats__item {
+											color: $color-green-500;
+											font-size: math.div($size-5, 2);
+											line-height: $size-4 - 0.5;
+										}
+									}
+								}
+							}
+							& > span {
+								color: $color-green-800;
+								font-weight: $fw-bold;
+							}
+						}
+					}
+					&:last-of-type {
+						padding: $size-3;
+						background-color: $color-red-500;
+						color: $color-white;
+						font-size: $size-3;
+						line-height: $size-4 - 0.5;
+						font-weight: $fw-bold;
+						text-align: center;
+						letter-spacing: $size-1;
+						transition: all 0.5s;
+						cursor: pointer;
+						&:hover {
+							background-color: $color-red-800;
+						}
+					}
+				}
+			}
+		}
+	}
+	.ticket-history-container {
+		margin: $size-0 auto;
+		section {
+			color: $color-gray-700;
+			& > div {
+				margin: $size-0 auto;
+				padding: $size-6 math.div($size-5, 2);
+				.ticket-history-container__tittle {
+					display: flex;
+					flex-direction: column;
+					text-align: center;
+					width: $size-full;
+					margin-bottom: $size-5 - 1;
+					h1 {
+						color: $color-gray-800;
+						margin: $size-0;
+						font-size: math.div($size-6, 2);
+						line-height: $size-6 - 1;
+					}
+				}
+				.ticket-history-container__content {
+					display: grid;
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+					gap: math.div($size-5, 2);
+					& > div {
+						display: flex;
+						align-items: center;
+						border: 2px solid $color-black-200;
+						padding: $size-3;
+						border-radius: $size-3;
+						img {
+							width: $size-6 + 1;
+							height: $size-6 + 1;
+							background-color: $color-gray-100;
+							border-radius: $size-full;
+							margin-right: $size-3;
+							object-fit: cover;
+							object-position: center;
+						}
+						& > div {
+							flex-grow: 1;
+							h2 {
+								color: $color-gray-800;
+								margin: 0 0 $size-2;
+								font-size: $size-3 + 0.1;
+							}
+							p {
+								&:last-of-type {
+									margin-bottom: $size-0;
+								}
+								span {
+									margin-right: math.div($size-3, 2);
+									color: $color-green-800;
+									font-weight: $fw-semibold;
+									font-size: math.div($size-4, 2);
+									line-height: $size-4 - 0.5;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $xl-screen) {
+		padding: math.div($size-5, 2);
+		.booking-seat-container {
+			.booking-seat__content {
+				& > div {
+					margin-top: $size-4 - 1;
+				}
+				.seat {
+					width: 35px;
+					height: 35px;
+					margin: 13px;
+					padding: 0 math.div($size-3, 4);
+					span {
+						font-size: $size-3;
+					}
+				}
+			}
+			.booking-seat__info {
+				& > div {
+					& > div {
+						&:first-of-type {
+							padding: $size-5 math.div($size-5, 2);
+							h3 {
+								font-size: math.div($size-6, 2);
+								line-height: $size-6 - 1;
+							}
+							div {
+								margin: $size-0 $size-0 math.div($size-5, 2);
+								&:first-of-type {
+									h3 {
+										font-size: math.div($size-5, 2);
+										line-height: $size-4 - 0.5;
+									}
+								}
+							}
+							.show-seats {
+								font-size: math.div($size-4, 2);
+								line-height: $size-4 - 0.5;
+							}
+						}
+						&:last-of-type {
+							font-size: math.div($size-4, 2);
+						}
+					}
+				}
+			}
+		}
+		.ticket-history-container {
+			section {
+				& > div {
+					padding: $size-6 * 2 math.div($size-5, 2);
+
+					.ticket-history-container__tittle {
+						margin-bottom: $size-5;
+						h1 {
+							font-size: $size-2 + 1;
+							line-height: $size-4;
+						}
+					}
+					.ticket-history-container__content {
+						grid-template-columns: repeat(3, minmax(0, 1fr));
+						& > div {
+							& > div {
+								h2 {
+									font-size: math.div($size-4, 2);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

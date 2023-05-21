@@ -9,6 +9,7 @@ import {
 } from "../actions/FilmManagementAction";
 import { STATUS_CODE } from "../../utils/settings/config";
 import { Notification } from "../../components/Notification/Notification";
+import { closeLoading } from "./LoadingSlice";
 
 export const FilmManagementSlice = createSlice({
 	name: "filmManagementSlice",
@@ -104,20 +105,32 @@ export const FilmManagementSlice = createSlice({
 		});
 		builder.addCase(addNewFilmAction.rejected, (state, action) => {
 			console.log({ state, action });
+			Notification(
+				"error",
+				"Update film failed!",
+				action.payload.response.data.content
+			);
 		});
 		builder.addCase(updateFilmDetailAction.fulfilled, (state, action) => {
-			const { result, navigate } = action.payload;
-			Notification("success", "Update film successfully!");
-			navigate("/admin/films");
+			const { result, navigate, dispatch } = action.payload;
+			if (result.status === STATUS_CODE.SUCCESS) {
+				Notification("success", "Update film successfully!");
+				navigate("/admin/films");
+			}
 		});
 		builder.addCase(updateFilmDetailAction.rejected, (state, action) => {
 			console.log({ state, action });
+			Notification(
+				"error",
+				"Update film failed!",
+				action.payload.response.data.content
+			);
 		});
 		builder.addCase(deleteFilmAction.fulfilled, (state, action) => {
 			Notification("success", "Delete film successfully!");
 		});
 		builder.addCase(deleteFilmAction.rejected, (state, action) => {
-			Notification("error", "Delete film falied!", err.response?.data.content);
+			Notification("error", "Delete film failed!", err.response?.data.content);
 		});
 	},
 });
