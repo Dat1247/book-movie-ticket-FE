@@ -7,7 +7,6 @@ export default function NotFound() {
 		<div
 			className='not-found'
 			style={{ backgroundImage: `url(${PageNotFoundImg})` }}>
-			{/* <img src={PageNotFoundImg} alt='not-found' /> */}
 			<NavLink to='/' className='link-home'>
 				Go Home
 			</NavLink>
