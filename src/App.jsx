@@ -21,6 +21,7 @@ import AddFilm from "./pages/Admin/Films/AddFilm/AddFilm";
 import EditFilm from "./pages/Admin/Films/EditFilm/EditFilm";
 import ShowTime from "./pages/Admin/Showtime/ShowTime";
 import { ConfigProvider } from "antd";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
 	const dispatch = useDispatch();
@@ -88,6 +89,7 @@ function App() {
 						<Route path='films/edit/:id' element={<EditFilm />} />
 						<Route path='/admin/films/showtime/:id' element={<ShowTime />} />
 					</Route>
+					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</ConfigProvider>
 		</div>

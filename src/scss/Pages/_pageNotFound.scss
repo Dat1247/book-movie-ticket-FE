@@ -1,0 +1,43 @@
+.not-found {
+	background: $color-black-200;
+	background-size: 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+	.link-home {
+		position: absolute;
+		top: 57%;
+		left: 50%;
+		font-size: $size-3;
+		transform: translate(-50%, -50%);
+		color: $color-black;
+		text-decoration: none;
+		font-weight: $fw-bold;
+		text-transform: uppercase;
+		transition: all 0.3s ease-in-out;
+		&:hover {
+			color: $color-cyan-600;
+		}
+	}
+
+	@media screen and (min-width: $sm-screen) {
+		.link-home {
+			top: 60%;
+			font-size: math.div($size-6, 2);
+		}
+	}
+	@media screen and (min-width: $md-screen) {
+		.link-home {
+			top: 65%;
+		}
+	}
+
+	@media screen and (min-width: $lg-screen) {
+		.link-home {
+			top: 70%;
+			font-size: $size-3 * 2;
+		}
+	}
+}

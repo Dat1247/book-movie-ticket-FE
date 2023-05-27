@@ -38,5 +38,6 @@
 	div.site-layout-background {
 		padding: math.div($size-6, 2);
 		min-height: $size-11 + 2;
+		height: 100%;
 	}
 }
