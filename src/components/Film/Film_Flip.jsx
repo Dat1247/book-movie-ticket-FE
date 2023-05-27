@@ -1,9 +1,11 @@
 import React from "react";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import { showVideo } from "../../redux/slices/ShowVideoSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function FilmFlip(props) {
-	const { film, dispatch } = props;
+	const { film, dispatch, navigate } = props;
+
 	return (
 		<div className='flip-card'>
 			<div className='flip-card-inner'>
@@ -21,7 +23,12 @@ export default function FilmFlip(props) {
 							}}>
 							<PlayCircleOutlined />
 						</div>
-						<div>{film.tenPhim}</div>
+						<div
+							onClick={() => {
+								navigate(`/detail/${film.maPhim}`);
+							}}>
+							{film.tenPhim}
+						</div>
 					</div>
 				</div>
 			</div>

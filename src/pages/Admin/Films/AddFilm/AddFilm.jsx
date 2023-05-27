@@ -161,6 +161,7 @@ export default function AddFilm(props) {
 			</Form>
 			<Button
 				danger
+				type='primary'
 				onClick={() => {
 					navigate(-1);
 				}}>

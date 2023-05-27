@@ -4,8 +4,8 @@
 		line-height: $size-3 * 2;
 		margin: 0;
 	}
-	button {
-		margin-bottom: $size-3;
+	& > button {
+		margin: math.div($size-3, 2) $size-0 $size-3;
 	}
 	.find-film-input {
 		margin-bottom: $size-3;

@@ -118,9 +118,9 @@ export default function Films(props) {
 
 	return (
 		<div className='film-management'>
-			<h3 className='text-2xl'>Film Management</h3>
+			<h3>Film Management</h3>
 			<Button
-				className='mb-4'
+				type='primary'
 				onClick={() => {
 					navigate("/admin/films/addfilm");
 				}}>

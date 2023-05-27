@@ -1,0 +1,6 @@
+@mixin textDanger($color, $fs, $mt, $fw: 500) {
+	color: $color;
+	font-size: $fs;
+	font-weight: $fw;
+	margin-top: $mt;
+}

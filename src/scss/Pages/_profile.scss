@@ -12,10 +12,11 @@
 				& > div {
 					grid-column: span 1 / span 1;
 					.text-danger {
-						color: $color-red-600;
-						font-size: 0.8rem;
-						font-weight: 500;
-						margin-top: 0.5rem;
+						@include textDanger(
+							$color-red-600,
+							$size-3 - 0.2,
+							math.div($size-3, 2)
+						);
 					}
 					.btnUpdate {
 						text-align: center;
@@ -52,51 +53,39 @@
 						line-height: $size-3 * 2;
 						color: $color-black;
 					}
-					.ticketItem {
-						width: $size-full;
-						height: math.div($size-10, 1.38);
-						& > div {
-							display: flex;
-							align-items: center;
-							height: $size-full;
-							padding: math.div($size-3, 2) $size-3;
-							background-color: $color-gray-100;
-							border: 1px solid $color-gray-300;
-							border-radius: math.div($size-3, 2);
-							box-shadow: 0 0 10px 5px $color-black-200;
-							img {
-								width: $size-6 + 1;
-								height: $size-6 + 1;
-								background-color: $color-gray-100;
-								object-fit: cover;
-								object-position: center;
-								margin-right: $size-3;
-								flex-shrink: 0;
-								border-radius: $size-full;
-							}
-						}
 
-						.item-detail {
+					.ticketItem {
+						display: flex;
+						align-items: center;
+						border: 2px solid $color-black-200;
+						padding: $size-3;
+						border-radius: $size-3;
+						img {
+							width: $size-6 + 1;
+							height: $size-6 + 1;
+							background-color: $color-gray-100;
+							border-radius: $size-full;
+							margin-right: $size-3;
+							object-fit: cover;
+							object-position: center;
+						}
+						& > div {
 							flex-grow: 1;
 							h2 {
 								color: $color-gray-800;
-								font-weight: $fw-bold;
-								line-height: $size-4 - 0.5;
-								font-size: $size-3;
-								margin: 0;
+								margin: 0 0 $size-2;
+								font-size: $size-3 + 0.1;
 							}
 							p {
-								margin: math.div($size-3, 4) 0;
-								font-size: $size-2;
-								&:first-of-type {
-									color: $color-gray-500;
-									font-style: italic;
-								}
 								&:last-of-type {
-									color: $color-green-800;
-									font-weight: $fw-bold;
-									padding-right: math.div($size-3, 4);
 									margin-bottom: $size-0;
+								}
+								span {
+									margin-right: math.div($size-3, 2);
+									color: $color-green-800;
+									font-weight: $fw-semibold;
+									font-size: math.div($size-4, 2);
+									line-height: $size-4 - 0.5;
 								}
 							}
 						}
@@ -153,7 +142,7 @@
 							font-size: math.div($size-6, 2);
 						}
 						.ticketItem {
-							height: $size-6 * 3;
+							min-height: $size-6 * 3;
 							.item-detail {
 								h2 {
 									font-size: $size-3;
@@ -177,7 +166,7 @@
 				.container {
 					& > div {
 						&:last-of-type {
-							grid-template-columns: repeat(3, minmax(0, 1fr));
+							grid-template-columns: repeat(2, minmax(0, 1fr));
 						}
 					}
 				}
@@ -189,22 +178,32 @@
 			.user-history-content {
 				.container {
 					margin: $size-4 - 1 auto;
+
+					max-height: $size-11 * 1.6;
 					& > div {
 						&:last-of-type {
-							max-height: $size-11 * 1.6;
+							grid-template-columns: repeat(3, minmax(0, 1fr));
+							& > div {
+								& > div {
+									h2 {
+										font-size: math.div($size-4, 2);
+									}
+								}
+							}
 						}
-						.ticketItem {
-							height: math.div($size-10, 1.38);
+					}
 
-							.item-detail {
-								h2 {
-									font-size: math.div($size-4, 2);
-									margin: 0 0 math.div($size-3, 2);
-								}
-								p {
-									margin: math.div($size-3, 2) 0;
-									font-size: $size-3;
-								}
+					.ticketItem {
+						min-height: math.div($size-10, 1.38);
+
+						.item-detail {
+							h2 {
+								font-size: math.div($size-4, 2);
+								margin: 0 0 math.div($size-3, 2);
+							}
+							p {
+								margin: math.div($size-3, 2) 0;
+								font-size: $size-3;
 							}
 						}
 					}

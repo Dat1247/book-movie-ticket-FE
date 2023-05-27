@@ -214,6 +214,7 @@ export default function EditFilm(props) {
 			</Form>
 			<Button
 				danger
+				type='primary'
 				onClick={() => {
 					navigate(-1);
 				}}>

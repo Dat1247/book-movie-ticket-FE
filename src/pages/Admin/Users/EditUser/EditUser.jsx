@@ -189,8 +189,8 @@ export default function EditUser(props) {
 				</Form.Item>
 			</Form>
 			<Button
-				className='ml-20'
 				danger
+				type='primary'
 				onClick={() => {
 					navigate(-1);
 				}}>

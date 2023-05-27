@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import FilmFlip from "../Film/Film_Flip";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
 	setComingSoonFilm,
 	setNowShowingFilm,
@@ -35,14 +35,15 @@ export default function MultipleRowsSlick(props) {
 		(state) => state.FilmManagementReducer
 	);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const renderFilm = () => {
 		return props.arrFilm.slice(0, 12).map((item, index) => {
 			return (
 				<div key={index} className='film_item'>
-					<FilmFlip film={item} dispatch={dispatch} />
+					<FilmFlip film={item} dispatch={dispatch} navigate={navigate} />
 					<div>
-						<NavLink to={`/detail/${item.maPhim}`}>ĐẶT VÉ</NavLink>
+						<NavLink to={`/detail/${item.maPhim}`}>BOOKING</NavLink>
 					</div>
 				</div>
 			);
@@ -87,7 +88,7 @@ export default function MultipleRowsSlick(props) {
 							dispatch(setNowShowingFilm());
 						}
 					}}>
-					Now Showing
+					NOW SHOWING
 				</button>
 				<button
 					className={`${comingSoon ? "active_film" : "none_active_film"}`}
@@ -96,7 +97,7 @@ export default function MultipleRowsSlick(props) {
 							dispatch(setComingSoonFilm());
 						}
 					}}>
-					Coming Soon
+					COMING SOON
 				</button>
 			</div>
 			<Slider {...settings}>{renderFilm()}</Slider>

@@ -1,0 +1,207 @@
+.darkTheme {
+	.ant-layout {
+		.ant-layout-sider {
+			background: $color-dark-0;
+		}
+		.ant-layout-sider-trigger {
+			background: $color-dark-1;
+			color: $color-white;
+		}
+		.ant-layout-content {
+			.site-layout-background {
+				background: $color-dark-5;
+			}
+		}
+	}
+
+	.header-app {
+		background-color: $color-black;
+		color: $color-white;
+	}
+
+	.footer-app {
+		background-color: $color-black;
+		.container {
+			border-color: $color-gray-400;
+
+			& > div {
+				&:first-of-type {
+					& > div {
+						&:not(:first-of-type) {
+							& > p {
+								color: $color-white;
+							}
+						}
+					}
+				}
+				&:last-of-type {
+					div {
+						color: $color-white;
+					}
+				}
+			}
+		}
+	}
+
+	.home-template {
+		background-color: $color-dark-5;
+		.main {
+			.homeMenu {
+				.filmItem {
+					& > div {
+						& > div {
+							a {
+								color: $color-green-500;
+							}
+							p {
+								color: $color-gray-300;
+							}
+							.listTime {
+								a {
+								}
+							}
+						}
+					}
+				}
+			}
+			.row-slick-films {
+				button {
+					color: $color-dark-0;
+					background-color: $color-white;
+					border: 2px solid $color-gray-1;
+
+					&.none_active_film {
+						background-color: $color-indigo-100;
+						color: $color-dark-0;
+					}
+					&:hover {
+						background-color: $color-gray-800;
+						color: $color-white;
+					}
+				}
+				.slick-arrow {
+					&::before {
+						color: $color-white !important;
+					}
+				}
+			}
+			.film_item {
+				& > div {
+					a {
+						background-color: $color-indigo-600;
+						color: $color-white;
+						border: 1px solid $color-indigo-600;
+						&:hover {
+							background-color: $color-dark-7;
+							color: $color-dark-0;
+							border-color: $color-black;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.profile-user {
+		.profile-content {
+			background-color: $color-dark-5;
+			.user-info-form {
+				& > div {
+					& > div {
+						.text-danger {
+							@include textDanger(
+								$color-red-500,
+								$size-3 - 0.2,
+								math.div($size-3, 2)
+							);
+						}
+					}
+				}
+			}
+			.user-history-content {
+				color: $color-gray-1;
+				.container {
+					& > div {
+						.history-title {
+							color: $color-dark-7;
+						}
+
+						.ticketItem {
+							border: 2px solid $color-white-200;
+
+							img {
+								background-color: $color-gray-100;
+							}
+							& > div {
+								h2 {
+									color: $color-white;
+								}
+								p {
+									span {
+										color: $color-green-500;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.admin-template {
+		header {
+			background-color: $color-dark-1;
+			& > div {
+				box-shadow: 0 0 10px 4px $color-black-200;
+				.header__left {
+					color: $color-black;
+				}
+			}
+		}
+	}
+	.user-management {
+		h3 {
+			color: $color-white;
+		}
+	}
+	.film-management {
+		h3 {
+			color: $color-white;
+		}
+	}
+
+	.checkout-container {
+		background-color: $color-dark-1;
+		.booking-seat-container {
+			.booking-seat__content {
+				.note-seat {
+					thead {
+						background-color: $color-dark-0;
+					}
+				}
+			}
+		}
+		.ticket-history-container {
+			section {
+				color: $color-gray-400;
+				& > div {
+					.ticket-history-container__tittle {
+						h1 {
+							color: $color-white;
+						}
+					}
+					.ticket-history-container__content {
+						& > div {
+							& > div {
+								h2 {
+									color: $color-white;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

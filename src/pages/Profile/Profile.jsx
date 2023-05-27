@@ -1,26 +1,23 @@
 import React, { useEffect } from "react";
 import { Button, Form, Input, Tabs } from "antd";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import _ from "lodash";
 import moment from "moment";
-import { TOKEN, USER_LOGIN } from "../../utils/settings/config";
+import { USER_LOGIN } from "../../utils/settings/config";
 import {
 	getDetailUserAction,
-	updateUserAction,
+	updateUserDetailAction,
 } from "../../redux/actions/UserManagementAction";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile(props) {
-	// const { userLogin, userDetail } = useSelector(
-	// 	(state) => state.UserManagementReducer
-	// );
+	const { userLogin, userDetail } = useSelector(
+		(state) => state.UserManagementReducer
+	);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const store = useStore().getState().UserManagementReducer;
-	const { userDetail, userLogin } = store;
-	console.log("store profile", store);
 
 	useEffect(() => {
 		if (!localStorage.getItem(USER_LOGIN)) {
@@ -31,9 +28,7 @@ export default function Profile(props) {
 
 	useEffect(() => {
 		dispatch(getDetailUserAction());
-	}, [dispatch, userDetail]);
-
-	console.log({ userLogin, userDetail });
+	}, [dispatch]);
 
 	const itemsProfile = [
 		{
@@ -67,18 +62,7 @@ export default function Profile(props) {
 
 const AccountInfo = (props) => {
 	let { userDetail, userLogin, dispatch } = props;
-	// const { userLogin, userDetail } = useSelector(
-	// 	(state) => state.UserManagementReducer
-	// );
-	// const dispatch = useDispatch();
-	// const { userDetail, userLogin } = useStore().getState().UserManagementReducer;
-	// useEffect(() => {
-	// 	dispatch(getDetailUserAction());
-	// });
 
-	useEffect(() => {
-		console.log("in effect", userDetail);
-	}, [userDetail]);
 	const formik = useFormik({
 		enableReinitialize: true,
 		initialValues: {
@@ -86,7 +70,7 @@ const AccountInfo = (props) => {
 			matKhau: userDetail?.matKhau,
 			email: userDetail?.email,
 			soDT: userDetail?.soDT,
-			maLoaiNguoiDung: userDetail?.loaiNguoiDung,
+			maLoaiNguoiDung: userLogin?.maLoaiNguoiDung,
 			hoTen: userDetail?.hoTen,
 			maNhom: userDetail?.maNhom,
 		},
@@ -104,10 +88,9 @@ const AccountInfo = (props) => {
 			hoTen: Yup.string().required("Name is required!"),
 		}),
 		onSubmit: (values) => {
-			dispatch(updateUserAction(values));
+			dispatch(updateUserDetailAction(values));
 		},
 	});
-	console.log("profile", { userLogin, userDetail });
 
 	const { values, errors, touched, handleChange, handleSubmit } = formik;
 
@@ -179,7 +162,10 @@ const AccountInfo = (props) => {
 						/>
 					</Form.Item>
 					<div className='btnUpdate'>
-						<Button htmlType='submit' type='primary'>
+						<Button
+							htmlType='submit'
+							type='primary'
+							style={{ boxShadow: "none" }}>
 							Update
 						</Button>
 					</div>
@@ -192,41 +178,29 @@ const AccountInfo = (props) => {
 const TicketHistory = (props) => {
 	const { userDetail } = useSelector((state) => state.UserManagementReducer);
 	const renderTicketItem = () => {
-		return userDetail?.thongTinDatVe?.map((ticket, index) => {
-			const seats = _.first(ticket.danhSachGhe);
-
+		return userDetail.thongTinDatVe?.map((item, index) => {
+			const arrSeat = _.first(item.danhSachGhe);
+			const arrSeatSort = _.sortBy(item.danhSachGhe, "maGhe");
 			return (
-				<div className='p-2 ticketItem w-full' key={index}>
-					<div className='h-full flex items-center border-gray-200 border p-4 rounded-lg bg-gray-100'>
-						<img
-							alt='team'
-							className='w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4'
-							src={ticket.hinhAnh}
-						/>
-						<div className='flex-grow item-detail'>
-							<h2 className='text-gray-900 title-font font-bold text-lg'>
-								{ticket.tenPhim}
-							</h2>
-							<p className='text-gray-500'>
-								Booking date:
-								{moment(ticket.ngayDat).format(" hh:mm A - DD-MM-YYYY")}
-							</p>
-							<p>
-								Location: {seats.tenHeThongRap} - {seats.tenCumRap}
-							</p>
-							<p>
-								Seats:{" "}
-								{ticket.danhSachGhe?.map((ghe, index) => {
-									return (
-										<span key={index} className='text-green-800 pr-1 font-bold'>
-											{"[ "}
-											{ghe.tenGhe}
-											{" ]"}
-										</span>
-									);
-								})}
-							</p>
-						</div>
+				<div className='ticketItem' key={index}>
+					<img alt='team' src={item.hinhAnh} />
+					<div className='flex-grow'>
+						<h2>{item.tenPhim}</h2>
+
+						<p>{moment(item.ngayDat).format("hh:mm A - DD/MM/YYYY")}</p>
+						<p>Address: {arrSeat.tenHeThongRap}</p>
+						<p>
+							Theater name: {arrSeat.tenCumRap} - Seats:{" "}
+							{arrSeatSort.map((ghe, index) => {
+								return (
+									<span key={index}>
+										{"[ "}
+										{ghe.tenGhe}
+										{" ]"}
+									</span>
+								);
+							})}
+						</p>
 					</div>
 				</div>
 			);
@@ -236,9 +210,9 @@ const TicketHistory = (props) => {
 		<section className='user-history-content'>
 			<div className='container'>
 				<div>
-					<h1 className='sm:text-3xl history-title'>TICKET HISTORY</h1>
+					<h1 className='history-title'>TICKET HISTORY</h1>
 				</div>
-				<div className='grid grid-cols-1 lg:gap-10 lg:grid-cols-2'>
+				<div className='user-history-content__content'>
 					{renderTicketItem()}
 				</div>
 			</div>

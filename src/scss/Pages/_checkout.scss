@@ -54,29 +54,29 @@
 				}
 			}
 			.seat.occupied {
-				background-color: rgb(224, 54, 54);
+				background-color: $color-red-500;
 				cursor: no-drop;
-				color: white;
+				color: $color-white;
 			}
 
 			.bookingSeat {
-				background-color: rgb(18, 176, 18) !important;
-				color: white;
+				background-color: $color-green-500 !important;
+				color: $color-white;
 			}
 
 			.vipSeat {
-				background-color: rgb(201, 196, 38);
-				color: white;
+				background-color: $color-yellow-600;
+				color: $color-white;
 			}
 
 			.seat.yourBooked {
-				background-color: rgb(194, 194, 194);
-				color: black;
-				box-shadow: 0 0px 10px -2px #000;
+				background-color: $color-gray-2;
+				color: $color-black;
+				box-shadow: 0 0px 10px -2px $color-black;
 			}
 
 			.otherOneAreBooking {
-				background-color: rgb(68, 131, 247);
+				background-color: $color-cyan-1;
 				color: white;
 				cursor: no-drop;
 			}

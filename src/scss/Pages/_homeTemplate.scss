@@ -1,4 +1,6 @@
 .home-template {
+	background-color: $color-white;
+	transition: all 0.5s;
 	.show-video {
 		position: fixed;
 		top: $size-0;
@@ -46,7 +48,8 @@
 	}
 
 	.main {
-		margin: 0 auto $size-6 * 2;
+		margin: 0 auto;
+		padding-bottom: $size-6 * 2;
 		& > div {
 			margin: 0 auto;
 			padding: $size-3 + 0.25 $size-6 * 2;
@@ -105,6 +108,7 @@
 								font-size: $size-3;
 								line-height: math.div($size-6, 2);
 								border-radius: $size-2 - 0.5;
+								transition: all 0.5s;
 								&:hover {
 									background-color: $color-cyan-600;
 									color: $color-white;
@@ -190,12 +194,12 @@
 
 				.flip-card-front {
 					background-color: rgba(54, 54, 54, 0.63);
-					color: white;
+					color: $color-white;
 				}
 
 				.flip-card-back {
 					background-color: rgba(0, 0, 0, 0.9);
-					color: white;
+					color: $color-white;
 					transform: rotateY(180deg);
 					top: 0;
 					left: 0;
@@ -235,6 +239,7 @@
 								font-weight: $fw-bold;
 								font-size: $size-3;
 								line-height: $size-3 * 2;
+								cursor: pointer;
 							}
 						}
 					}

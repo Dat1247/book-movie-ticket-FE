@@ -9,7 +9,6 @@ export const getArrayFilmAction = createAsyncThunk(
 			const result = await FilmManagementService.getArrayFilm(filmName);
 			return result.data;
 		} catch (err) {
-			// alert(err.response?.data.content);
 			return rejectWithValue(err);
 		}
 	}
@@ -22,7 +21,6 @@ export const getArrayBannerAction = createAsyncThunk(
 			const result = await FilmManagementService.getArrayBanner();
 			return result.data;
 		} catch (err) {
-			// alert(err.response?.data.content);
 			return rejectWithValue(err);
 		}
 	}
@@ -46,8 +44,8 @@ export const addNewFilmAction = createAsyncThunk(
 		dispatch(openLoading());
 		try {
 			let result = await FilmManagementService.addNewFilm(formData);
-			dispatch(closeLoading());
 			const { navigate } = getState().HistoryReducer;
+			dispatch(closeLoading());
 			return { result, navigate };
 		} catch (err) {
 			dispatch(closeLoading());
@@ -78,12 +76,14 @@ export const updateFilmDetailAction = createAsyncThunk(
 export const deleteFilmAction = createAsyncThunk(
 	"filmManagement/deleteFilmAction",
 	async (filmCode, { dispatch, rejectWithValue }) => {
+		dispatch(openLoading());
 		try {
 			const result = await FilmManagementService.deleteFilm(filmCode);
 			await dispatch(getArrayFilmAction());
-
+			dispatch(closeLoading());
 			return result;
 		} catch (err) {
+			dispatch(closeLoading());
 			return rejectWithValue(err);
 		}
 	}

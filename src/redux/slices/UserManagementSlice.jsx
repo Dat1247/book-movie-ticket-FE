@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { USER_LOGIN, TOKEN, STATUS_CODE } from "../../utils/settings/config";
 import { Notification } from "../../components/Notification/Notification";
-import { closeLoading } from "./LoadingSlice";
 import {
 	addUserAction,
 	deleteUserAction,
@@ -12,6 +11,7 @@ import {
 	loginAction,
 	registerAction,
 	updateUserAction,
+	updateUserDetailAction,
 } from "../actions/UserManagementAction";
 
 let user = {};
@@ -43,12 +43,20 @@ export const UserManagementSlice = createSlice({
 				const userLogin = data.content;
 				localStorage.setItem(USER_LOGIN, JSON.stringify(userLogin));
 				localStorage.setItem(TOKEN, JSON.stringify(userLogin.accessToken));
+				Notification("success", "Login successfully!");
 				navigate("/");
 				state.userLogin = userLogin;
 			}
 		});
 		builder.addCase(loginAction.rejected, (state, action) => {
-			console.log("error", { state, action });
+			let content = "";
+			if (
+				action.payload.response?.data.content ===
+				"Tài khoản hoặc mật khẩu không đúng!"
+			) {
+				content = "Account or password is incorrect!!";
+			}
+			Notification("error", "Login failed!", content);
 		});
 		builder.addCase(registerAction.fulfilled, (state, action) => {
 			const { result, navigate } = action.payload;
@@ -71,10 +79,19 @@ export const UserManagementSlice = createSlice({
 
 		builder.addCase(getDetailUserAction.fulfilled, (state, action) => {
 			state.userDetail = action.payload.content;
-			console.log("slice", state.userDetail);
 		});
 		builder.addCase(getDetailUserAction.rejected, (state, action) => {
 			console.log({ state, action });
+		});
+		builder.addCase(updateUserDetailAction.fulfilled, (state, action) => {
+			Notification("success", "Update profile successfully!");
+		});
+		builder.addCase(updateUserDetailAction.rejected, (state, action) => {
+			let content = "";
+			if (action.payload.response?.data.content === "Email đã tồn tại!") {
+				content = "Email already exists!";
+			}
+			Notification("error", "Register failed!", content);
 		});
 		builder.addCase(getArrayUserAction.fulfilled, (state, action) => {
 			if (action.payload.statusCode === STATUS_CODE.SUCCESS) {
@@ -85,7 +102,7 @@ export const UserManagementSlice = createSlice({
 			console.log("error", action.payload);
 		});
 		builder.addCase(deleteUserAction.fulfilled, (state, action) => {
-			const { result, dispatch } = action.payload;
+			const { result } = action.payload;
 			if (result.data.statusCode === STATUS_CODE.SUCCESS) {
 				Notification("success", "Delete user successfully!");
 			}
@@ -93,7 +110,7 @@ export const UserManagementSlice = createSlice({
 		builder.addCase(deleteUserAction.rejected, (state, action) => {
 			Notification(
 				"error",
-				"Xóa người dùng thất bại",
+				"Delete user failed!",
 				action.payload.response?.data.content
 			);
 		});

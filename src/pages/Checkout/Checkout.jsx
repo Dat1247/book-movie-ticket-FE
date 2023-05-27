@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UserOutlined } from "@ant-design/icons";
 import _ from "lodash";
 import { Popover, Tabs } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
@@ -17,12 +16,9 @@ import {
 } from "../../redux/slices/TicketManagementSlice";
 import { getDetailUserAction } from "../../redux/actions/UserManagementAction";
 
-const { TabPane } = Tabs;
-
 function Checkout(props) {
 	const dispatch = useDispatch();
 	const params = useParams();
-	const navigate = useNavigate();
 	const { userLogin } = useSelector((state) => state.UserManagementReducer);
 	const { roomDetail, arrSeatsBooking, arrSeatsBooked } = useSelector(
 		(state) => state.TicketManagementReducer
@@ -153,7 +149,7 @@ function Checkout(props) {
 											return (tongTien += ghe.giaVe);
 										}, 0)
 										.toLocaleString()}{" "}
-									đ
+									Đ
 								</span>
 							</div>
 							<hr />
@@ -170,13 +166,14 @@ function Checkout(props) {
 
 						<div
 							onClick={() => {
+								if (arrSeatsBooking.length === 0) return;
 								let bookTicketDetail = {
 									maLichChieu: params.id,
 									danhSachVe: arrSeatsBooking,
 								};
 								dispatch(bookTicketAction(bookTicketDetail));
 							}}>
-							ĐẶT VÉ
+							BOOKING
 						</div>
 					</div>
 				</div>
@@ -190,6 +187,7 @@ export default function CheckoutTab(props) {
 	const { userLogin } = useSelector((state) => state.UserManagementReducer);
 	const dispatch = useDispatch();
 	const params = useParams();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(getRoomDetailAction(params.id));
@@ -250,7 +248,7 @@ export default function CheckoutTab(props) {
 					<Popover content={content}>
 						{
 							<p>
-								Xin chào! <span>{userLogin.taiKhoan}</span>
+								Hello! <span>{userLogin.taiKhoan}</span>
 							</p>
 						}
 					</Popover>
@@ -266,7 +264,7 @@ export default function CheckoutTab(props) {
 			children: <Checkout />,
 		},
 		{
-			label: "02 BOOKING HISTORY",
+			label: "02 TICKET HISTORY",
 			key: "2",
 			children: <KetQuaDatVe />,
 		},
@@ -315,14 +313,12 @@ function KetQuaDatVe(props) {
 						</h2>
 
 						<p>{moment(item.ngayDat).format("hh:mm A - DD/MM/YYYY")}</p>
-						<p>Địa điểm: {arrSeat.tenHeThongRap}</p>
+						<p>Address: {arrSeat.tenHeThongRap}</p>
 						<p>
-							Tên rạp: {arrSeat.tenCumRap} - Ghế:{" "}
+							Theater name: {arrSeat.tenCumRap} - Seats:{" "}
 							{arrSeatSort.map((ghe, index) => {
 								return (
-									<span
-										key={index}
-										className='mr-2 text-green-800 text-lg font-semibold'>
+									<span key={index}>
 										{"[ "}
 										{ghe.tenGhe}
 										{" ]"}

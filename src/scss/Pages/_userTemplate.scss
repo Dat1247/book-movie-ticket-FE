@@ -72,10 +72,11 @@
 				}
 			}
 			.text-danger {
-				color: $color-red-600;
-				font-size: 0.8rem;
-				font-weight: 500;
-				margin-top: 0.5rem;
+				@include textDanger(
+					$color-red-600,
+					$size-3 - 0.2,
+					math.div($size-3, 2)
+				);
 			}
 		}
 

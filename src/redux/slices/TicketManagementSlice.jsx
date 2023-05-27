@@ -45,9 +45,10 @@ export const TicketManagementSlice = createSlice({
 			console.log({ state, action });
 		});
 		builder.addCase(bookTicketAction.fulfilled, (state, action) => {
-			Notification("success", "Book ticket successfully!");
+			Notification("success", "Ticket booking successfully!");
 		});
 		builder.addCase(bookTicketAction.rejected, (state, action) => {
+			Notification("error", "Ticket booking failed!");
 			console.log({ state, action });
 		});
 	},

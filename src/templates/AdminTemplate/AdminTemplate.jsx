@@ -1,8 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { TOKEN, USER_LOGIN } from "../../utils/settings/config";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Popover } from "antd";
 import {
 	DesktopOutlined,
 	TeamOutlined,
@@ -12,6 +12,7 @@ import {
 	FundOutlined,
 } from "@ant-design/icons";
 import WarningTemplate from "../WarningTemplate/WarningTemplate";
+import { toggleDarkMode } from "../../redux/slices/ThemeSlice";
 
 const { Header, Content, Sider } = Layout;
 
@@ -37,7 +38,9 @@ const items = [
 
 export const AdminTemplate = (props) => {
 	const { userLogin } = useSelector((state) => state.UserManagementReducer);
+	const { isDark } = useSelector((state) => state.ThemeReducer);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [state, setState] = useState({
 		collapsed: true,
 	});
@@ -67,6 +70,59 @@ export const AdminTemplate = (props) => {
 		setState({ collapsed });
 	};
 
+	const content = (
+		<div className={isDark ? "dropdownUser dark" : "dropdownUser"}>
+			<div className='dark-mode-toggle'>
+				<h3>Dark Mode</h3>
+				<div>
+					<span>Off</span>
+					<label htmlFor='checkbox'>
+						<input
+							type='checkbox'
+							name=''
+							id='checkbox'
+							checked={isDark}
+							onChange={() => {
+								dispatch(toggleDarkMode());
+							}}
+						/>
+						<div className='slider'></div>
+					</label>
+					<span>On</span>
+				</div>
+			</div>
+			{userLogin?.maLoaiNguoiDung === "QuanTri" ? (
+				<>
+					<p
+						className='textAdmin'
+						onClick={() => {
+							navigate("/admin");
+						}}>
+						Admin
+					</p>
+				</>
+			) : (
+				""
+			)}
+			<p
+				onClick={() => {
+					navigate("/profile");
+				}}>
+				User detail
+			</p>
+
+			<p
+				onClick={() => {
+					localStorage.removeItem(TOKEN);
+					localStorage.removeItem(USER_LOGIN);
+					navigate("/");
+					window.location.reload();
+				}}>
+				Log out
+			</p>
+		</div>
+	);
+
 	if (widthScreen.width >= 992) {
 		return (
 			<>
@@ -75,9 +131,8 @@ export const AdminTemplate = (props) => {
 						collapsible
 						collapsed={state.collapsed}
 						onCollapse={onCollapse}>
-						<div className='logo' />
 						<Menu
-							theme='dark'
+							theme={isDark ? "dark" : "light"}
 							defaultSelectedKeys={["1"]}
 							mode='inline'
 							items={items}
@@ -113,22 +168,9 @@ export const AdminTemplate = (props) => {
 									</NavLink>
 								</div>
 								<div className='header__left'>
-									<div
-										onClick={() => {
-											navigate("/profile");
-										}}>
-										<div>{userLogin?.taiKhoan?.substr(0, 1)}</div>
-									</div>
-									<div
-										onClick={() => {
-											localStorage.removeItem(USER_LOGIN);
-											localStorage.removeItem(TOKEN);
-											navigate("/");
-											window.location.reload();
-										}}
-										className='text-danger'>
-										Log out
-									</div>
+									<Popover content={content}>
+										{<div>{userLogin?.taiKhoan?.substr(0, 1)}</div>}
+									</Popover>
 								</div>
 							</div>
 						</Header>

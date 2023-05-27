@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { Notification } from "../../../components/Notification/Notification";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { TheaterManagementService } from "../../../services/TheaterManagementService";
 import { createShowtimeAction } from "../../../redux/actions/TheaterManagementAction";
 
@@ -15,6 +15,7 @@ export default function ShowTime(props) {
 	});
 	const dispatch = useDispatch();
 	const codeFilm = useParams();
+	const navigate = useNavigate();
 
 	const formik = useFormik({
 		initialValues: {
@@ -151,6 +152,7 @@ export default function ShowTime(props) {
 			</Form>
 			<Button
 				danger
+				type='primary'
 				onClick={() => {
 					navigate(-1);
 				}}>

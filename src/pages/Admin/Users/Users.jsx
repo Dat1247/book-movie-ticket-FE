@@ -137,6 +137,7 @@ export default function Users(props) {
 		<div className='user-management'>
 			<h3>User Management</h3>
 			<Button
+				type='primary'
 				onClick={() => {
 					navigate("/admin/users/adduser");
 				}}>

@@ -1,16 +1,38 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Popover } from "antd";
 import { TOKEN, USER_LOGIN } from "../../../../utils/settings/config";
+import { toggleDarkMode } from "../../../../redux/slices/ThemeSlice";
 
 export default function Header(props) {
 	const { userLogin } = useSelector((state) => state.UserManagementReducer);
 	const { navigate } = useSelector((state) => state.HistoryReducer);
+	const { isDark } = useSelector((state) => state.ThemeReducer);
+	const dispatch = useDispatch();
 
 	const content = (
-		<div className='dropdownUser'>
+		<div className={isDark ? "dropdownUser dark" : "dropdownUser"}>
+			<div className='dark-mode-toggle'>
+				<h3>Dark Mode</h3>
+				<div>
+					<span>Off</span>
+					<label htmlFor='checkbox'>
+						<input
+							type='checkbox'
+							name=''
+							id='checkbox'
+							checked={isDark}
+							onChange={() => {
+								dispatch(toggleDarkMode());
+							}}
+						/>
+						<div className='slider'></div>
+					</label>
+					<span>On</span>
+				</div>
+			</div>
 			{userLogin?.maLoaiNguoiDung === "QuanTri" ? (
 				<>
 					<p

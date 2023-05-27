@@ -7,10 +7,8 @@ export const loginAction = createAsyncThunk(
 	async (user, { getState, rejectWithValue }) => {
 		try {
 			const result = await UserManagementService.login(user);
-
 			const data = result.data;
 			const { navigate } = getState().HistoryReducer;
-
 			return { data, navigate };
 		} catch (err) {
 			return rejectWithValue(err);
@@ -50,11 +48,14 @@ export const getArrayUserAction = createAsyncThunk(
 export const deleteUserAction = createAsyncThunk(
 	"userManagement/deleteUserAction",
 	async (account, { dispatch, rejectWithValue }) => {
+		dispatch(openLoading());
 		try {
 			const result = await UserManagementService.deleteUser(account);
 			await dispatch(getArrayUserAction());
+			dispatch(closeLoading());
 			return { result, dispatch };
 		} catch (err) {
+			dispatch(closeLoading());
 			return rejectWithValue(err);
 		}
 	}
@@ -72,16 +73,13 @@ export const addUserAction = createAsyncThunk(
 	"userManagement/addUserAction",
 	async (newUser, { getState, dispatch, rejectWithValue }) => {
 		dispatch(openLoading());
-
 		try {
 			const result = await UserManagementService.addUser(newUser);
 			const { navigate } = getState().HistoryReducer;
 			dispatch(closeLoading());
-
 			return { result, navigate };
 		} catch (err) {
 			dispatch(closeLoading());
-
 			return rejectWithValue(err);
 		}
 	}
@@ -89,13 +87,15 @@ export const addUserAction = createAsyncThunk(
 
 export const updateUserAction = createAsyncThunk(
 	"userManagement/updateUserAction",
-	async (userUpdate, { getState, rejectWithValue }) => {
+	async (userUpdate, { getState, dispatch, rejectWithValue }) => {
+		dispatch(openLoading());
 		try {
 			const result = await UserManagementService.updateUser(userUpdate);
 			const { navigate } = getState().HistoryReducer;
-
+			dispatch(closeLoading());
 			return { result, navigate };
 		} catch (err) {
+			dispatch(closeLoading());
 			return rejectWithValue(err);
 		}
 	}
@@ -104,7 +104,22 @@ export const getDetailUserAction = createAsyncThunk(
 	"userManagement/getDetailUserAction",
 	async () => {
 		const result = await UserManagementService.getAccountDetail();
-		console.log("run get detail");
 		return result.data;
+	}
+);
+
+export const updateUserDetailAction = createAsyncThunk(
+	"userManagement/updateUserDetailAction",
+	async (userUpdate, { dispatch, rejectWithValue }) => {
+		dispatch(openLoading());
+		try {
+			const result = await UserManagementService.updateUser(userUpdate);
+			await dispatch(getDetailUserAction());
+			dispatch(closeLoading());
+			return result.data;
+		} catch (err) {
+			dispatch(closeLoading());
+			return rejectWithValue(err);
+		}
 	}
 );

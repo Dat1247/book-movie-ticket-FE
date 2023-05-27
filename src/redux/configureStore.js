@@ -6,6 +6,7 @@ import FilmManagementReducer from "./slices/FilmManagementSlice.jsx";
 import TheaterManagementReducer from "./slices/TheaterManagementSlice.jsx";
 import ShowVideoReducer from "./slices/ShowVideoSlice.jsx";
 import TicketManagementReducer from "./slices/TicketManagementSlice.jsx";
+import ThemeReducer from "./slices/ThemeSlice.jsx";
 
 export const store = configureStore({
 	reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
 		TheaterManagementReducer: TheaterManagementReducer,
 		ShowVideoReducer: ShowVideoReducer,
 		TicketManagementReducer: TicketManagementReducer,
+		ThemeReducer: ThemeReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({ serializableCheck: false }),
